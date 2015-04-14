@@ -1,12 +1,28 @@
 grammar ElConcatenator;
 
+//Program
+prog : circuit command { System.out.println("\nSUGOI!!!"); };
+WS : [ \t\r\n]+ -> skip;
+
+
+//Circuit
+circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' ;
+
+
+//Command
+command : descr command | eval command | ;
+descr : 'descr()';
+eval : 'eval' LPAR testval RPAR ;
+
+
 //Input
-circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' 'descr()' 'eval' LPAR testval RPAR { System.out.println("\nSUGOI!!!"); };
 input : id moreinput ;
 moreinput : ',' id moreinput | ;
+
+
+//Output
 output : id moreoutput ;
 moreoutput : ',' id moreoutput | ;
-WS : [ \t\r\n]+ -> skip;
 
 
 //List of equations
