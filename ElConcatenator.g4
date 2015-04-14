@@ -1,7 +1,7 @@
 grammar ElConcatenator;
 
 //Input
-circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' { System.out.println("\nSUGOI!!!"); };
+circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' 'descr()' 'eval' LPAR testval RPAR { System.out.println("\nSUGOI!!!"); };
 input : id moreinput ;
 moreinput : ',' id moreinput | ;
 output : id moreoutput ;
@@ -20,14 +20,18 @@ equat : id '=' boolexpre ';' ;
 //Boolean expressions
 boolexpre : expr ;
 expr : unaire oper;
-oper : ET expr | OU expr | ;
+oper : AND expr | OR expr | ;
 unaire : id | LPAR expr RPAR | INV LPAR expr RPAR;
 id : FIRSTCHAR (MORECHAR)*;
 
 LPAR : '(' ; RPAR : ')' ;
-ET : '&' ; OU : '|' ; INV : '!' ;
+AND : '&' ; OR : '|' ; INV : '!' ;
 FIRSTCHAR : [a-z] | [A-Z];
 MORECHAR : [a-z] | [A-Z] | [0-9];
+
+//Test value for eval function
+testval : 'true' moretestval | 'false' moretestval ;
+moretestval : ',' testval moretestval | ;
 
 
 

@@ -2,3 +2,6 @@ eq_circuit(a1,b2,c3) returns (d4,e5,f6)
 d1=a1&b2;
 end
 
+descr()
+eval(true,true,false,true)
+
