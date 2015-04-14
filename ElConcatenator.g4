@@ -1,8 +1,20 @@
 grammar ElConcatenator;
 
-//Boolean equations
-equat : id '=' boolexpre ';' { System.out.println("\nSUGOI!!!"); };
+//Input
+circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' { System.out.println("\nSUGOI!!!"); };
+input : id moreinput ;
+moreinput : ',' id moreinput | ;
+output : id moreoutput ;
+moreoutput : ',' id moreoutput | ;
 WS : [ \t\r\n]+ -> skip;
+
+
+//List of equations
+listequat : equat listequat | ;
+
+
+//Boolean equations
+equat : id '=' boolexpre ';' ;
 
 
 //Boolean expressions
