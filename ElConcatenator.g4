@@ -1,5 +1,7 @@
 grammar ElConcatenator;
 
+@header{import circuits.*;}
+
 //Program
 prog : circuit command;
 WS : [ \t\r\n]+ -> skip;
@@ -36,7 +38,7 @@ equat : ID '=' boolexpre ';' ;
 //Boolean expressions
 boolexpre : expr ;
 expr : unaire oper;
-oper : AND expr /*{new And();}*/ | OR expr/*{new Or();}*/ | ; //création des portes AND/OR
+oper : AND expr {new And();} | OR expr {new Or();} | ; //création des portes AND/OR
 unaire : ID | LPAR expr RPAR | INV LPAR expr RPAR;
 
 ID : ([a-z][a-z]*[A-Z]*[0-9]*)+ ;
