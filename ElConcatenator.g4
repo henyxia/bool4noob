@@ -1,7 +1,7 @@
 grammar ElConcatenator;
 
 //Program
-prog /*returns [ListBExpr]*/: circuit command;
+prog : circuit command;
 WS : [ \t\r\n]+ -> skip;
 
 
@@ -16,12 +16,12 @@ eval : 'eval' LPAR testval RPAR ;
 
 
 //Input
-input returns [inputs i] : id=ID moreinput ;
-moreinput : ',' id=ID moreinput | ;
+input : ID moreinput ;
+moreinput : ',' ID moreinput | ;
 
 
 //Output
-output returns [outputs o] : id=ID moreoutput;
+output : ID moreoutput;
 moreoutput : ',' ID moreoutput | ;
 
 
@@ -36,7 +36,7 @@ equat : ID '=' boolexpre ';' ;
 //Boolean expressions
 boolexpre : expr ;
 expr : unaire oper;
-oper : AND expr {new And();} | OR expr{new Or();} | ; //création des portes AND/OR
+oper : AND expr /*{new And();}*/ | OR expr/*{new Or();}*/ | ; //création des portes AND/OR
 unaire : ID | LPAR expr RPAR | INV LPAR expr RPAR;
 
 ID : ([a-z][a-z]*[A-Z]*[0-9]*)+ ;
