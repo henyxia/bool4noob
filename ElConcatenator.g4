@@ -1,12 +1,12 @@
 grammar ElConcatenator;
 
 //Program
-prog : circuit command { System.out.println("\nSUGOI!!!"); };
+prog /*returns [ListBExpr]*/: circuit command;
 WS : [ \t\r\n]+ -> skip;
 
 
 //Circuit
-circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end' ;
+circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end';
 
 
 //Command
@@ -16,13 +16,13 @@ eval : 'eval' LPAR testval RPAR ;
 
 
 //Input
-input : id moreinput ;
-moreinput : ',' id moreinput | ;
+input returns [inputs i] : id=ID moreinput ;
+moreinput : ',' id=ID moreinput | ;
 
 
 //Output
-output : id moreoutput ;
-moreoutput : ',' id moreoutput | ;
+output returns [outputs o] : id=ID moreoutput;
+moreoutput : ',' ID moreoutput | ;
 
 
 //List of equations
@@ -30,20 +30,18 @@ listequat : equat listequat | ;
 
 
 //Boolean equations
-equat : id '=' boolexpre ';' ;
+equat : ID '=' boolexpre ';' ;
 
 
 //Boolean expressions
 boolexpre : expr ;
 expr : unaire oper;
-oper : AND expr | OR expr | ;
-unaire : id | LPAR expr RPAR | INV LPAR expr RPAR;
-id : FIRSTCHAR (MORECHAR)*;
+oper : AND expr {new And();} | OR expr{new Or();} | ; //création des portes AND/OR
+unaire : ID | LPAR expr RPAR | INV LPAR expr RPAR;
 
+ID : ([a-z][a-z]*[A-Z]*[0-9]*)+ ;
 LPAR : '(' ; RPAR : ')' ;
 AND : '&' ; OR : '|' ; INV : '!' ;
-FIRSTCHAR : [a-z] | [A-Z];
-MORECHAR : [a-z] | [A-Z] | [0-9];
 
 //Test value for eval function
 testval : 'true' moretestval | 'false' moretestval ;
