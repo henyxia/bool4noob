@@ -50,7 +50,7 @@ public class TestCircuits
 		((Or)composants[3]).setIn2(composants[1]);
 		((Not)composants[4]).setIn(composants[2]);
 		//((Not)composants[4]).setIn(new LazyProbe(composants[2], "in"));
-		Circuit circuit = new Circuit("my cool circuit", composants);
+		Circuit circuit = new Circuit("my cool circuit");
 
 		//Affichage
 		//System.out.println("Part list");

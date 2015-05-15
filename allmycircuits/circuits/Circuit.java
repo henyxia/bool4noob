@@ -10,8 +10,8 @@ public class Circuit implements Serializable
 	protected	String nom;
 	private		List<Composant> composants = new ArrayList<Composant>();
 	protected	ProbeTable probt = new ProbeTable();
-	protected	Map<String, Interrupteur> inputs = new LinkedHashMap<String, Interrupteur>();
-	protected	Map<String, Vanne> outputs = new LinkedHashMap<String, Vanne>();
+	public		Map<String, Interrupteur> inputs = new LinkedHashMap<String, Interrupteur>();
+	public		Map<String, Vanne> outputs = new LinkedHashMap<String, Vanne>();
 
 	public Circuit(String nom)
 	{
@@ -121,6 +121,28 @@ public class Circuit implements Serializable
 			noms.add(composants.get(i).getId());
 
 		return noms;
+	}
+
+	public void addCmp(String type, Composant cmp)
+	{
+		if(type.equals("not"))
+		{
+			composants.add(cmp);
+			System.out.println("Not, name is "+ cmp);
+		}
+		else if(type.equals("or"))
+		{
+			composants.add(cmp);
+			System.out.println("Or, name is "+ cmp);
+		}
+		else if(type.equals("and"))
+		{
+			composants.add(cmp);
+			System.out.println("And, name is "+ cmp);
+		}
+		else
+			System.out.println("New item " + type + " not recognized (name : " + cmp + ")");
+
 	}
 
 	public void addCmp(String type, String name)

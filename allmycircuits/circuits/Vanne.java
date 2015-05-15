@@ -20,6 +20,7 @@ public class Vanne extends Composant
 
 	public String description()
 	{
-		return getId() + " in: " + in.getId();
+		//return getId() + " in: " + in.getId();
+		return getId();
 	}
 }
