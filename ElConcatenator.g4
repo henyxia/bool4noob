@@ -69,11 +69,7 @@ AND : '&';
 OR : '|';
 INV : '!';
 
-testval : 'true' moretestval | 'false' moretestval ;
+testval : 'true' moretestval {myCircuit.addInputValue("true");}
+	| 'false' moretestval {myCircuit.addInputValue("false");};
 moretestval : ',' testval moretestval | ;
-
-/*notes lel :
-List <Inter> is = new ArrayList<Inter>(ins.values());
-*/
-
 

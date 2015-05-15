@@ -1,7 +1,7 @@
 eq_circuit(a1,b2,c3) returns (d4,e5,f6)
 d4=a1&b2;
 e5=a1|c3;
-f6=(a1&b2)|!(c3);
+f6=b2|!(c3);
 end
 
 descr()
