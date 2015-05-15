@@ -49,6 +49,8 @@ AND : '&' ; OR : '|' ; INV : '!' ;
 testval : 'true' moretestval | 'false' moretestval ;
 moretestval : ',' testval moretestval | ;
 
-
+/*notes lel :
+List <Inter> is = new ArrayList<Inter>(ins.values());
+*/
 
 
