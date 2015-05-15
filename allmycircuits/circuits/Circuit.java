@@ -130,15 +130,17 @@ public class Circuit implements Serializable
 			Interrupteur cp = new Interrupteur();
 			composants.add(cp);
 			inputs.put(name, cp);
+			System.out.println("New input, name is "+ name);
 		}
 		else if(type.equals("out"))
 		{
 			Vanne cp = new Vanne();
 			composants.add(cp);
 			outputs.put(name, cp);
+			System.out.println("New output, name is "+ name);
 		}
 		else
-			System.out.printf("New item " + type + " not recognized (name : " + name + ")");
+			System.out.println("New item " + type + " not recognized (name : " + name + ")");
 	}
 
 	public void TraceEtats()

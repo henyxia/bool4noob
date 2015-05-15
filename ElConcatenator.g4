@@ -3,52 +3,39 @@ grammar ElConcatenator;
 @header{import circuits.*;}
 @members{CircuitParser myCircuit = new CircuitParser("AllMyCircuits");}
 
-//Program
 prog : circuit command;
 WS : [ \t\r\n]+ -> skip;
 
-
-//Circuit
 circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end';
 
-
-//Command
 command : descr command
 | eval command {myCircuit.eval();}
 | ;
 descr : 'descr()';
 eval : 'eval' LPAR testval RPAR ;
 
+input : ID moreinput {myCircuit.addCmp("in", $ID.text);};
+moreinput : ',' ID moreinput {myCircuit.addCmp("in", $ID.text);} | ;
 
-//Input
-input : ID moreinput ;
-moreinput : ',' ID moreinput | ;
+output : ID moreoutput {myCircuit.addCmp("out", $ID.text);};
+moreoutput : ',' ID moreoutput {myCircuit.addCmp("out", $ID.text);} | ;
 
-
-//Output
-output : ID moreoutput;
-moreoutput : ',' ID moreoutput | ;
-
-
-//List of equations
 listequat : equat listequat | ;
 
-
-//Boolean equations
 equat : ID '=' boolexpre ';' ;
 
-
-//Boolean expressions
 boolexpre : expr ;
 expr : unaire oper;
 oper : AND expr {new And();} | OR expr {new Or();} | ; //création des portes AND/OR
 unaire : ID | LPAR expr RPAR | INV LPAR expr RPAR;
 
 ID : ([a-z][a-z]*[A-Z]*[0-9]*)+ ;
-LPAR : '(' ; RPAR : ')' ;
-AND : '&' ; OR : '|' ; INV : '!' ;
+LPAR : '(';
+RPAR : ')';
+AND : '&';
+OR : '|';
+INV : '!';
 
-//Test value for eval function
 testval : 'true' moretestval | 'false' moretestval ;
 moretestval : ',' testval moretestval | ;
 

@@ -1,10 +1,13 @@
 package circuits;
 
 import java.util.*;
-import java.io.*;
 
 public class CircuitParser extends Circuit
 {
+	public Map<String, Interrupteur> intNames = new LinkedHashMap<String, Interrupteur> ();
+	public Map<String, Vanne> outNames = new LinkedHashMap<String, Vanne> ();
+	public List<Boolean> intVals = new ArrayList<Boolean> ();
+
 	public CircuitParser(String name)
 	{
 		super(name);
