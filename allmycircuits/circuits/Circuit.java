@@ -8,7 +8,7 @@ public class Circuit implements Serializable
 	private static final long serialVersionUID = 7586471155622776147L;
 
 	protected	String nom;
-	private		List<Composant> composants = new ArrayList<Composant>();
+	public		List<Composant> composants = new ArrayList<Composant>();
 	protected	ProbeTable probt = new ProbeTable();
 	public		Map<String, Interrupteur> inputs = new LinkedHashMap<String, Interrupteur>();
 	public		Map<String, Vanne> outputs = new LinkedHashMap<String, Vanne>();
@@ -128,7 +128,7 @@ public class Circuit implements Serializable
 		if(type.equals("not"))
 		{
 			composants.add(cmp);
-			System.out.println("Not, name is "+ cmp);
+			System.out.println("Not, name is "+ cmp + "in : " +((Not)cmp).getIn());
 		}
 		else if(type.equals("or"))
 		{

@@ -24,14 +24,14 @@ listequat : equat listequat | ;
 
 equat : ID '=' expr ';'
 {
-	System.out.println("Setting expression for " + $ID.text);
+	//System.out.println("Setting expression for " + $ID.text);
 	myCircuit.outputs.get($ID.text).setIn($expr.e);
 };
 
 expr returns [Composant e]:
 	ID
 	{
-		$e=myCircuit.intNames.get($ID.text);
+		$e=myCircuit.inputs.get($ID.text);
 	}
 	| LPAR expr RPAR
 	{
