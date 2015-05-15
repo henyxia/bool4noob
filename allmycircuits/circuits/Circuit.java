@@ -7,17 +7,15 @@ public class Circuit implements Serializable
 {
 	private static final long serialVersionUID = 7586471155622776147L;
 
-	private		String nom;
+	protected	String nom;
 	private		List<Composant> composants = new ArrayList<Composant>();
 	protected	ProbeTable probt = new ProbeTable();
 	protected	Map<String, Interrupteur> inputs = new LinkedHashMap<String, Interrupteur>();
 	protected	Map<String, Vanne> outputs = new LinkedHashMap<String, Vanne>();
 
-	public Circuit(String nom, Composant[] cps)
+	public Circuit(String nom)
 	{
 		this.nom = nom;
-		composants.addAll(Arrays.asList(cps));
-		Collections.sort(composants);
 	}
 
 	public void initProbe()

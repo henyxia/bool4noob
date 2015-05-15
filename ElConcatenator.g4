@@ -1,6 +1,7 @@
 grammar ElConcatenator;
 
 @header{import circuits.*;}
+@members{CircuitParser myCircuit = new CircuitParser("AllMyCircuits");}
 
 //Program
 prog : circuit command;
@@ -12,7 +13,9 @@ circuit : 'eq_circuit' LPAR input RPAR 'returns' LPAR output RPAR listequat 'end
 
 
 //Command
-command : descr command | eval command | ;
+command : descr command
+| eval command {myCircuit.eval();}
+| ;
 descr : 'descr()';
 eval : 'eval' LPAR testval RPAR ;
 
